@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Katana-website/static/css/main.86c6b85d.css",
+    "main.js": "/Katana-website/static/js/main.e6aafcae.js",
+    "static/js/453.670e15c7.chunk.js": "/Katana-website/static/js/453.670e15c7.chunk.js",
+    "static/media/evento2.png": "/Katana-website/static/media/evento2.7e7fe52bee2c9035eb10.png",
+    "static/media/evento1.png": "/Katana-website/static/media/evento1.22dadb2addcdd39343ec.png",
+    "static/media/slide4.jpg": "/Katana-website/static/media/slide4.914b7e31a64f8b72cbf8.jpg",
+    "static/media/slide5.jpg": "/Katana-website/static/media/slide5.438839f6b0acf9a71619.jpg",
+    "static/media/pezkoi.png": "/Katana-website/static/media/pezkoi.f3500b5b8af7a66b2d87.png",
+    "static/media/slide1.jpg": "/Katana-website/static/media/slide1.ef3da3edef0cd55788ab.jpg",
+    "static/media/slide2.jpg": "/Katana-website/static/media/slide2.717e673b411a704560bb.jpg",
+    "static/media/slide3.jpg": "/Katana-website/static/media/slide3.8050cea9331deef95b68.jpg",
+    "index.html": "/Katana-website/index.html",
+    "static/media/CherryIcon.svg": "/Katana-website/static/media/CherryIcon.0b387399d54c2edb265590ea7e744a2f.svg",
+    "main.86c6b85d.css.map": "/Katana-website/static/css/main.86c6b85d.css.map",
+    "main.e6aafcae.js.map": "/Katana-website/static/js/main.e6aafcae.js.map",
+    "453.670e15c7.chunk.js.map": "/Katana-website/static/js/453.670e15c7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.86c6b85d.css",
+    "static/js/main.e6aafcae.js"
+  ]
+}
