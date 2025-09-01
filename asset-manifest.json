@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Katana-website/static/css/main.86c6b85d.css",
-    "main.js": "/Katana-website/static/js/main.e6aafcae.js",
+    "main.js": "/Katana-website/static/js/main.ce222369.js",
     "static/js/453.670e15c7.chunk.js": "/Katana-website/static/js/453.670e15c7.chunk.js",
     "static/media/evento2.png": "/Katana-website/static/media/evento2.7e7fe52bee2c9035eb10.png",
     "static/media/evento1.png": "/Katana-website/static/media/evento1.22dadb2addcdd39343ec.png",
@@ -14,11 +14,11 @@
     "index.html": "/Katana-website/index.html",
     "static/media/CherryIcon.svg": "/Katana-website/static/media/CherryIcon.0b387399d54c2edb265590ea7e744a2f.svg",
     "main.86c6b85d.css.map": "/Katana-website/static/css/main.86c6b85d.css.map",
-    "main.e6aafcae.js.map": "/Katana-website/static/js/main.e6aafcae.js.map",
+    "main.ce222369.js.map": "/Katana-website/static/js/main.ce222369.js.map",
     "453.670e15c7.chunk.js.map": "/Katana-website/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.86c6b85d.css",
-    "static/js/main.e6aafcae.js"
+    "static/js/main.ce222369.js"
   ]
 }
