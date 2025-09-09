@@ -96,7 +96,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
                 <h3 className="text-xl font-semibold text-white mb-2">Error al cargar el menú</h3>
                 <p className="text-gray-400 mb-4">No se pudo cargar el archivo PDF</p>
                 <button
-                  onClick={() => window.open('/documents/menu2.pdf', '_blank')}
+                  onClick={() => window.open('/documents/menu.pdf', '_blank')}
                   className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-300"
                 >
                   Abrir en nueva pestaña
@@ -106,7 +106,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           )}
           
           <iframe
-            src="/documents/menu2.pdf"
+            src="/documents/menu.pdf"
             className="w-full h-full border-0"
             title="Menú de Bebidas Katana"
             onLoad={handlePdfLoad}
@@ -122,7 +122,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           <p className="text-gray-400 text-xs md:text-sm">
             Si tienes problemas visualizando el menú, 
             <button
-              onClick={() => window.open('/documents/menu2.pdf', '_blank')}
+              onClick={() => window.open('/documents/menu.pdf', '_blank')}
               className="text-red-400 hover:text-red-300 ml-1 underline"
             >
               ábrelo en una nueva pestaña

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiShoppingCart, FiExternalLink } from 'react-icons/fi';
 import WhiteButton from '../utils/WhiteButton.tsx';
 import BlackButton from '../utils/BlackButton.tsx';
@@ -19,42 +19,55 @@ interface BlogPost {
 const BoxBlog: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredPostId, setHoveredPostId] = useState<number | null>(null); // Changed from isHovered to hoveredPostId for individual hover
 
   const blogPosts: BlogPost[] = [
     {
       id: 1,
-      title: "Concurso de Talentos Caucel",
-      date: "27 Julio 2025",
-      location: "Caucel, Mérida",
-      description: "Participamos en el concurso de talentos de Caucel brindando café premium a los participantes y espectadores. Fue una experiencia increíble ver cómo nuestro café acompañó los momentos de creatividad y arte de la comunidad.",
+      title: "Puesto de café en el Parque de los Discapacitados",
+      date: "Todos los domingos",
+      location: "Parque de los Discapacitados. Mérida, Caucel.",
+      description: "Participamos en el tianguis de Caucel brindando café premium a los participantes y espectadores. Es una experiencia increíble ver cómo nuestro café acompaña los momentos de creatividad y arte con la comunidad.",
       image: evento2Image,
-      category: "Eventos Comunitarios"
+      category: "Evento Comunitario"
     },
     {
       id: 2,
       title: "Evento Privado Club Mazda MX5",
-      date: "8 AGOSTO 2025",
+      date: "13 Septiembre 2025",
       location: "Reunión Privada, Mérida",
-      description: "Serviremos a aproximadamente 20 entusiastas del Mazda MX5 en su evento cerrado del club. Los miembros disfrutaran de nuestros cafés especiales mientras compartían anécdotas sobre sus autos clásicos.",
+      description: "Serviremos a aproximadamente 40 entusiastas del Mazda MX5 en su evento cerrado del club. Los miembros disfrutaran de nuestros cafés especiales mientras compartían anécdotas sobre sus autos clásicos.",
       image: evento1Image,
-      category: "Eventos Privados"
+      category: "Eventos Privado"
     }
   ];
 
+  // Add auto-play functionality (advance by 2)
+  useEffect(() => {
+    if (hoveredPostId === null) { // Pause only if no post is hovered
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => 
+          (prevIndex + 2) % blogPosts.length
+        );
+      }, 5000); // Auto-advance every 5 seconds
+      return () => clearInterval(interval);
+    }
+  }, [hoveredPostId, blogPosts.length]); // Updated dependency
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === blogPosts.length - 1 ? 0 : prevIndex + 1
+      (prevIndex + 2) % blogPosts.length
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? blogPosts.length - 1 : prevIndex - 1
+      prevIndex - 2 < 0 ? blogPosts.length - 2 : prevIndex - 2
     );
   };
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+    setCurrentIndex(index * 2); // Jump to group of 2
   };
 
   const handleOpenModal = () => {
@@ -67,56 +80,46 @@ const BoxBlog: React.FC = () => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
-      <div className="overflow-hidden rounded-lg">
+      <div 
+        className="overflow-hidden rounded-lg relative"
+        // Removed global onMouseEnter/onMouseLeave
+      >
         <div 
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          className="flex gap-2 transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${(currentIndex / 2) * 100}%)` }}
         >
           {blogPosts.map((post) => (
-            <div key={post.id} className="w-full flex-shrink-0 px-4">
-              <div className="bg-gray-900 border border-red-500/30 rounded-lg overflow-hidden hover:border-red-500/50 transition-all duration-300 group">
-                <div className="relative h-48 bg-gray-800 overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-gray-900/30"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="p-6">
+            <div 
+              key={post.id} 
+              className="w-1/2 flex-shrink-0 relative"
+              onMouseEnter={() => setHoveredPostId(post.id)} // Individual hover start
+              onMouseLeave={() => setHoveredPostId(null)} // Individual hover end
+            >
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className="w-full h-96 object-cover aspect-square rounded-lg" // Added rounded-lg for rounded borders
+              />
+              {/* Glass effect overlay on hover */}
+              <div className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${hoveredPostId === post.id ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="flex flex-col justify-center items-center h-full p-6 text-white text-center">
+                  <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                    {post.category}
+                  </span>
+                  <h3 className="text-2xl font-bold mb-4">{post.title}</h3>
                   <div className="flex items-center gap-2 mb-3">
-                    <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span className="text-red-400 text-sm font-medium">{post.date}</span>
+                    <span className="text-sm font-medium">{post.date}</span>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-red-400 transition-colors duration-300">
-                    {post.title}
-                  </h3>
-                  
-                  <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                    {post.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-gray-400 text-sm">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span>{post.location}</span>
-                    </div>
-                    
-                    <button className="text-red-500 hover:text-red-400 transition-colors duration-300 text-sm font-medium">
-                      Leer más →
-                    </button>
+                  <p className="text-sm leading-relaxed mb-4">{post.description}</p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>{post.location}</span>
                   </div>
                 </div>
               </div>
@@ -137,12 +140,12 @@ const BoxBlog: React.FC = () => {
         </button>
 
         <div className="flex gap-2">
-          {blogPosts.map((_, index) => (
+          {Array.from({ length: Math.ceil(blogPosts.length / 2) }, (_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex
+                index === Math.floor(currentIndex / 2)
                   ? 'bg-red-500'
                   : 'bg-gray-600 hover:bg-gray-500'
               }`}
@@ -167,8 +170,8 @@ const BoxBlog: React.FC = () => {
             Ubicación de Fin de Semana
           </h3>
           <p className="text-gray-300 text-lg">
-            Encuéntranos en el <strong className="text-red-400">Parque de los Discapacitados</strong> 
-            todos los sábados y domingos
+            Encuéntranos en <strong className="text-red-400">Nuestro nuevo local </strong> o en el <strong className="text-red-400">Parque de los Discapacitados </strong>
+            todos los domingos
           </p>
         </div>
         
@@ -183,14 +186,14 @@ const BoxBlog: React.FC = () => {
                   <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span><strong>Horario:</strong> 9:00 AM - 6:00 PM</span>
+                  <span><strong>Horario:</strong> 7:00 AM - 12:00 PM / 5:00 PM - 10:00 PM</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span><strong>Días:</strong> Sábados y Domingos</span>
+                  <span><strong>Días:</strong> Lunes - Domingos</span>
                 </div>
                 
                 <div className="flex items-start gap-3 text-gray-300">
@@ -198,20 +201,20 @@ const BoxBlog: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span><strong>Ubicación:</strong> Parque de los Discapacitados, Mérida, Yucatán</span>
+                  <span><strong>Ubicación:</strong> Calle 31 #862 x 108 y 110. Ciudad Caucel. Local N1.</span>
                 </div>
                 
                 <div className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span><strong>Servicio:</strong> Café premium y bebidas frías</span>
+                  <span><strong>Servicio:</strong> Café premium, bebidas frías y postres</span>
                 </div>
               </div>
               
               <div className="mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
                 <p className="text-red-400 text-sm font-medium text-center">
-                  ¡Ven y prueba la experiencia completa del café japonés!
+                  ¡Ven y prueba la experiencia completa del café en un ambiente acogedor!
                 </p>
               </div>
             </div>
@@ -225,11 +228,11 @@ const BoxBlog: React.FC = () => {
               </h4>
               <div className="relative rounded-lg overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.687740748243!2d-89.71919522398474!3d21.005150580638198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f560b2344c3b933%3A0x832dbdcd137f024!2sParque%20De%20Los%20Discapacitados!5e0!3m2!1ses-419!2smx!4v1754336691112!5m2!1ses-419!2smx" 
-                  width="100%" 
-                  height="300" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1881.7559015250395!2d-89.71854026106236!3d21.009302996147696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f560b5d11d1c30f%3A0xba867795a03cd33b!2sC.%2031%20862%2C%20Cd%20Caucel%2C%2097314%20M%C3%A9rida%2C%20Yuc.!5e0!3m2!1ses-419!2smx!4v1757033601747!5m2!1ses-419!2smx" 
+                  width="600" 
+                  height="450" 
                   style={{ border: 0 }}
-                  allowFullScreen={true}
+                  allowFullScreen
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
                   className="rounded-lg"

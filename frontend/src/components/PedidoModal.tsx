@@ -27,21 +27,41 @@ const PedidoModal: React.FC<PedidoModalProps> = ({ isOpen, onClose }) => {
 
   // Dummy products - to be replaced with real data
   const products: Product[] = [
-    { id: 1, name: 'Americano', japaneseName: 'アメリカーノ', price: 45, category: 'cafe' },
-    { id: 2, name: 'Latte', japaneseName: 'ラテ', price: 60, category: 'cafe' },
-    { id: 3, name: 'Cappuccino', japaneseName: 'カプチーノ', price: 55, category: 'cafe' },
-    { id: 4, name: 'Moka', japaneseName: 'モカ', price: 65, category: 'cafe' },
-    { id: 5, name: 'Frappe de Oreo', japaneseName: 'オレオフラッペ', price: 85, category: 'frio' },
-    { id: 6, name: 'Smoothie Fresa', japaneseName: 'ストロベリースムージー', price: 75, category: 'frio' },
-    { id: 7, name: 'Smoothie Mango', japaneseName: 'マンゴースムージー', price: 75, category: 'frio' },
-    { id: 8, name: 'Té Verde', japaneseName: '緑茶', price: 40, category: 'te' },
-    { id: 9, name: 'Té Negro', japaneseName: '紅茶', price: 40, category: 'te' },
+    { id: 1, name: 'Americano', japaneseName: '', price: 45, category: 'espresso' },
+    { id: 2, name: 'Espresso', japaneseName: '', price: 45, category: 'espresso' },
+    { id: 3, name: 'Cappuccino', japaneseName: '', price: 55, category: 'espresso' },
+    { id: 4, name: 'Latte', japaneseName: '', price: 65, category: 'espresso' },
+    { id: 5, name: 'Mocha', japaneseName: '', price: 70, category: 'espresso' },
+    { id: 6, name: 'Caramel Macchiato', japaneseName: '', price: 70, category: 'espresso' },
+    { id: 7, name: 'Affogato', japaneseName: '', price: 65, category: 'espresso' },
+    { id: 8, name: 'Cold Brew', japaneseName: '', price: 70, category: 'espresso' },
+    { id: 9, name: 'Frappuccino', japaneseName: '', price: 65, category: 'espresso' },
+    { id: 10, name: 'Frappuccino Nutella', japaneseName: '', price: 80, category: 'espresso' },
+    { id: 11, name: 'Frappé de oreo', japaneseName: '', price: 80, category: 'sincafe'},
+    { id: 12, name: 'Frappé de mazapán', japaneseName: '', price: 70, category: 'sincafe'},
+    { id: 13, name: 'Frappé de Carlos V', japaneseName: '', price: 65, category: 'sincafe'},
+    { id: 14, name: 'Frappé de Nutella', japaneseName: '', price: 70, category: 'sincafe' },
+    { id: 15, name: 'Frappé de Horchata Artesanal', japaneseName: '', price: 65, category: 'sincafe' },
+    { id: 16, name: 'Frappé frutal', japaneseName: '', price: 65, category: 'sincafe' },
+    { id: 17, name: 'Mangoyada', japaneseName: '', price: 70, category: 'sincafe' },
+    { id: 18, name: 'Té helado', japaneseName: '', price: 45, category: 'sincafe' },
+    { id: 19, name: 'Horchata Artesanal', japaneseName: '', price: 50, category: 'sincafe' },
+    { id: 20, name: 'Chocolate', japaneseName: '', price: 60, category: 'sincafe' },
+    { id: 21, name: 'Fresa', japaneseName: '', price: 75, category: 'smoothies' },
+    { id: 22, name: 'Plátano', japaneseName: '', price: 75, category: 'smoothies' },
+    { id: 23, name: 'Piña', japaneseName: '', price: 75, category: 'smoothies' },
+    { id: 24, name: 'Mango', japaneseName: '', price: 75, category: 'smoothies' },
+    { id: 25, name: 'Frutos Rojos', japaneseName: '', price: 75, category: 'smoothies' },
+    { id: 26, name: 'Flan Imposible', japaneseName: '', price: 45, category: 'postres' },
+    { id: 27, name: 'Flan Napolitano', japaneseName: '', price: 35, category: 'postres' },
+    { id: 28, name: 'Fogata de bombones', japaneseName: '', price: 250, category: 'postres' }
   ];
 
   const categories = [
-    { id: 'cafe', name: 'Café Caliente', japanese: 'ホットコーヒー' },
-    { id: 'frio', name: 'Bebidas Frías', japanese: '冷たい飲み物' },
-    { id: 'te', name: 'Té', japanese: 'お茶' },
+    { id: 'espresso', name: 'Espresso', japanese: '' },
+    { id: 'sincafe', name: 'Sin Café', japanese: '' },
+    { id: 'smoothies', name: 'Smoothies', japanese: '' },
+    { id: 'postres', name: 'Postres', japanese: '' }
   ];
 
   const filteredProducts = products.filter(product => product.category === activeCategory);

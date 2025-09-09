@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FiShoppingCart } from 'react-icons/fi';
 import WhiteButton from '../utils/WhiteButton.tsx';
+import PedidoModal from './PedidoModal.tsx';
 
 interface HeroSectionInicioProps {
   onScheduleClick: () => void;
 }
 
 const HeroSectionInicio: React.FC<HeroSectionInicioProps> = ({ onScheduleClick }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="relative w-full h-screen overflow-hidden flex items-center">
       {/* Video Background */}
@@ -34,14 +46,29 @@ const HeroSectionInicio: React.FC<HeroSectionInicioProps> = ({ onScheduleClick }
             de barra de café. Calidad premium y atención personalizada para crear 
             momentos inolvidables.
           </p>
-          <button
-            onClick={onScheduleClick}
-            className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300"
-          >
-            Agendar evento
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={onScheduleClick}
+              className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300"
+            >
+              Agendar evento
+            </button>
+            <button
+              onClick={handleOpenModal}
+              className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2"
+            >
+              <FiShoppingCart className="w-5 h-5" />
+              Levantar Pedido
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Modal de Pedido */}
+      <PedidoModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </div>
   );
 };
