@@ -100,7 +100,7 @@ const PedidoModal: React.FC<PedidoModalProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    let message = `🌸 *Nuevo Pedido - Katana Coffee* 🌸\n\n`;
+    let message = `🌸 *Nuevo Pedido - KiKOI Coffee* 🌸\n\n`;
     message += `👤 *Cliente:* ${customerName}\n`;
     message += `📅 *Fecha:* ${orderDate}\n`;
     message += `⏰ *Hora:* ${orderTime}\n\n`;
@@ -111,7 +111,7 @@ const PedidoModal: React.FC<PedidoModalProps> = ({ isOpen, onClose }) => {
     });
 
     message += `\n💰 *Total: $${calculateTotal()} MXN*\n\n`;
-    message += `¡Gracias por elegir Katana Coffee! 🙏`;
+    message += `¡Gracias por elegir KiKOI Coffee! 🙏`;
 
     const phoneNumber = '529993661475';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;

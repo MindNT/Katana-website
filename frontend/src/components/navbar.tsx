@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import katanaLogo from '../images/katana.png';
+import katanaLogo from '../images/KiKOI.png';
 import { ReactComponent as CherryIcon } from '../assets/CherryIcon.svg';
 
 interface NavbarProps {
@@ -75,15 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick, onNavigate }) => {
             </div>
 
             {/* Logo central */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <img 
                 src={katanaLogo} 
                 alt="Katana Logo" 
-                className="h-6 w-auto sm:h-8"
+                className="h-8 w-auto sm:h-10"
               />
-              <span className="text-white font-bold text-lg sm:text-xl">
-                KATANA
-              </span>
             </div>
 
             {/* Opciones del lado derecho - Solo desktop */}

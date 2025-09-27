@@ -66,7 +66,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="text-center mb-4">
           <h2 className="text-2xl md:text-3xl font-bold text-red-500 mb-2">
-            Menú Katana
+            Menú KiKOI
           </h2>
           <p className="text-gray-300 text-sm md:text-base">
             Explora nuestra carta de bebidas premium
@@ -108,7 +108,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           <iframe
             src="/documents/menu.pdf"
             className="w-full h-full border-0"
-            title="Menú de Bebidas Katana"
+            title="Menú de Bebidas KiKOI"
             onLoad={handlePdfLoad}
             onError={handlePdfError}
             style={{ 
